@@ -75,3 +75,31 @@ print(countPairs([3,1,2,2,2,1,3], 2))
 output:
 4
 
+5.Write a program FOR THE BELOW TEST CASES with least time complexity
+Test Cases: -
+1) Input: {1, 2, 3, 4, 5} Expected Output: 5
+2) Input: {7, 7, 7, 7, 7} Expected Output: 7
+3) Input: {-10, 2, 3, -4, 5} Expected Output: 5
+
+code:
+def findMax(arr):
+    if not arr:
+        return None
+
+    max_val = arr[0]
+    for num in arr:
+        if num > max_val:
+            max_val = num
+
+    return max_val
+
+# Test
+print(findMax([1,2,3,4,5]))
+print(findMax([7,7,7,7,7]))
+print(findMax([-10,2,3,-4,5]))
+
+output:
+5
+7
+5
+
