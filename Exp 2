@@ -1,0 +1,18 @@
+2.You are given two integer arrays nums1 and nums2 of sizes n and m, respectively. Calculate
+the following values: answer1 : the number of indices i such that nums1[i] exists in nums2.
+answer2 : the number of indices i such that nums2[i] exists in nums1 Return [answer1,answer2].
+
+Code:
+def findCounts(nums1, nums2):
+    set1 = set(nums1)
+    set2 = set(nums2)
+
+    answer1 = sum(1 for x in nums1 if x in set2)
+    answer2 = sum(1 for x in nums2 if x in set1)
+
+    return [answer1, answer2]
+
+print(findCounts([2,3,2], [1,2]))
+
+output:
+[2, 1]
