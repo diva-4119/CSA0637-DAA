@@ -1,0 +1,249 @@
+1.Given an array of strings words, return the first palindromic string in the array. If there is no
+such string, return an empty string "". A string is palindromic if it reads the same forward and
+backward.
+Code:
+def firstPalindrome(words):
+  for word in words:
+    if word == word[::-1]:
+     return word
+  return ""
+print(firstPalindrome(["abc","car","ada","racecar","cool"]))
+
+Output:
+adc
+
+2.You are given two integer arrays nums1 and nums2 of sizes n and m, respectively. Calculate
+the following values: answer1 : the number of indices i such that nums1[i] exists in nums2.
+answer2 : the number of indices i such that nums2[i] exists in nums1 Return [answer1,answer2].
+
+Code:
+def findCounts(nums1, nums2):
+    set1 = set(nums1)
+    set2 = set(nums2)
+
+    answer1 = sum(1 for x in nums1 if x in set2)
+    answer2 = sum(1 for x in nums2 if x in set1)
+
+    return [answer1, answer2]
+
+print(findCounts([2,3,2], [1,2]))
+
+output:
+[2, 1]
+
+3.You are given a 0-indexed integer array nums. The distinct count of a subarray of nums is
+defined as: Let nums[i..j] be a subarray of nums consisting of all the indices from i to j such that
+0 <= i <= j < nums.length. Then the number of distinct values in nums[i..j] is called the distinct
+count of nums[i..j]. Return the sum of the squares of distinct counts of all subarrays of nums. A
+subarray is a contiguous non-empty sequence of elements within an array.
+
+code:
+def sumCounts(nums):
+    n = len(nums)
+    total = 0
+
+    for i in range(n):
+        distinct = set()
+        for j in range(i, n):
+            distinct.add(nums[j])
+            total += len(distinct) ** 2
+
+    return total
+
+print(sumCounts([1,2,1]))
+
+output:
+15
+
+4.Given a 0-indexed integer array nums of length n and an integer k, return the number of pairs
+(i, j) where 0 <= i < j < n, such that nums[i] == nums[j] and (i * j) is divisible by k.
+
+code:
+def countPairs(nums, k):
+    n = len(nums)
+    count = 0
+
+    for i in range(n):
+        for j in range(i+1, n):
+            if nums[i] == nums[j] and (i * j) % k == 0:
+                count += 1
+
+    return count
+
+print(countPairs([3,1,2,2,2,1,3], 2))
+
+output:
+4
+
+5.Write a program FOR THE BELOW TEST CASES with least time complexity
+Test Cases: -
+1) Input: {1, 2, 3, 4, 5} Expected Output: 5
+2) Input: {7, 7, 7, 7, 7} Expected Output: 7
+3) Input: {-10, 2, 3, -4, 5} Expected Output: 5
+
+code:
+def findMax(arr):
+    if not arr:
+        return None
+
+    max_val = arr[0]
+    for num in arr:
+        if num > max_val:
+            max_val = num
+
+    return max_val
+
+# Test
+print(findMax([1,2,3,4,5]))
+print(findMax([7,7,7,7,7]))
+print(findMax([-10,2,3,-4,5]))
+
+output:
+5
+7
+5
+
+6.You have an algorithm that process a list of numbers. It firsts sorts the list using an
+efficient sorting algorithm and then finds the maximum element in sorted list. Write the
+code for the same.
+Test Cases
+1. Empty List
+1. Input: []
+2. Expected Output: None or an appropriate message indicating that the list is empty.
+2. Single Element List
+1. Input: [5]
+2. Expected Output: 5
+3. All Elements are the Same
+1. Input: [3, 3, 3, 3, 3]
+2. Expected Output: 3
+
+code:
+def sortAndFindMax(arr):
+    if not arr:
+        return None
+
+    arr.sort()   # efficient sort
+    return arr[-1]
+
+# Test
+print(sortAndFindMax([]))
+print(sortAndFindMax([5]))
+print(sortAndFindMax([3,3,3,3]))
+
+output:
+None
+5
+3
+
+7.Write a program that takes an input list of n numbers and creates a new list containing only
+the unique elements from the original list. What is the space complexity of the algorithm?
+Test Cases
+Some Duplicate Elements
+Input: [3, 7, 3, 5, 2, 5, 9, 2]
+Expected Output: [3, 7, 5, 2, 9] (Order may vary based on the algorithm used)
+Negative and Positive Numbers
+Input: [-1, 2, -1, 3, 2, -2]
+Expected Output: [-1, 2, 3, -2] (Order may vary)
+List with Large Numbers
+Input: [1000000, 999999, 1000000]
+Expected Output: [1000000, 999999]
+
+code:
+def uniqueElements(arr):
+    return list(set(arr))
+
+# Example
+print(uniqueElements([3,7,3,5,2,5,9,2]))
+
+output:
+[2, 3, 5, 7, 9]
+
+8.Sort an array of integers using the bubble sort technique. Analyze its time complexity using
+Big-O notation. Write the code
+
+code:
+def bubbleSort(arr):
+    n = len(arr)
+
+    for i in range(n):
+        for j in range(0, n-i-1):
+            if arr[j] > arr[j+1]:
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+
+    return arr
+
+# Example
+print(bubbleSort([5,3,8,4,2]))
+
+output:
+[2, 3, 4, 5, 8]
+
+9.Checks if a given number x exists in a sorted array arr using binary search. Analyze its time
+complexity using Big-O notation.
+
+code:
+def binarySearch(arr, key):
+    arr.sort()   # ensure sorted
+    low, high = 0, len(arr)-1
+
+    while low <= high:
+        mid = (low + high) // 2
+
+        if arr[mid] == key:
+            return mid
+        elif arr[mid] < key:
+            low = mid + 1
+        else:
+            high = mid - 1
+
+    return -1
+
+# Example
+arr = [3,4,6,-9,10,8,9,30]
+result = binarySearch(arr, 10)
+
+if result != -1:
+    print("Element found at position", result)
+else:
+    print("Element not found")
+
+output:
+Element found at position 6
+
+10.Given an array of integers nums, sort the array in ascending order and return it. You must
+solve the problem without using any built-in functions in O(nlog(n)) time complexity and with the
+smallest space complexity possible.
+
+code:
+def mergeSort(arr):
+    if len(arr) <= 1:
+        return arr
+
+    mid = len(arr)//2
+    left = mergeSort(arr[:mid])
+    right = mergeSort(arr[mid:])
+
+    return merge(left, right)
+
+def merge(left, right):
+    result = []
+    i = j = 0
+
+    while i < len(left) and j < len(right):
+        if left[i] < right[j]:
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j += 1
+
+    result.extend(left[i:])
+    result.extend(right[j:])
+
+    return result
+
+# Example
+print(mergeSort([5,2,3,1]))
+
+output:
+[1, 2, 3, 5]
